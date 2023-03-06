@@ -1,0 +1,23 @@
+{
+  "name": "home-api",
+  "version": "1.0.0",
+  "description": "Home Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/analuramalho/home-api.git"
+  },
+  "keywords": [],
+  "author": "@analuramalho_, @gabriel-camargo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/analuramalho/home-api/issues"
+  },
+  "homepage": "https://github.com/analuramalho/home-api#readme",
+  "dependencies": {
+    "git-commit-msg-linter": "^4.8.3"
+  }
+}

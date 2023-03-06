@@ -19,5 +19,9 @@
   "homepage": "https://github.com/analuramalho/home-api#readme",
   "dependencies": {
     "git-commit-msg-linter": "^4.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.6",
+    "typescript": "^4.9.5"
   }
 }

@@ -6,12 +6,24 @@ interface HttpResponse {
   status: number
 }
 
+export interface EmailValidatorInterface {
+  valid: (email: string) => boolean
+}
+
 export class AuthController {
-  signUp (requestBody: HttpRequest): HttpResponse {
-    if (requestBody.body.name === null || requestBody.body.name === undefined) {
+  constructor (
+    private readonly emailValidator: EmailValidatorInterface
+  ) {}
+
+  signUp (request: HttpRequest): HttpResponse {
+    if (request.body.name === null || request.body.name === undefined) {
       return { status: 400 }
     }
-    if (requestBody.body.email === null || requestBody.body.email === undefined) {
+    if (request.body.email === null || request.body.email === undefined) {
+      return { status: 400 }
+    }
+
+    if (!this.emailValidator.valid(request.body.email)) {
       return { status: 400 }
     }
 

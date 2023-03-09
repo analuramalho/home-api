@@ -27,6 +27,17 @@ export class AuthController {
       return { status: 400 }
     }
 
+    if (request.body.password === null || request.body.password === undefined) {
+      return { status: 400 }
+    }
+    if (request.body.passwordConfirm === null || request.body.passwordConfirm === undefined) {
+      return { status: 400 }
+    }
+
+    if (request.body.password !== request.body.passwordConfirm) {
+      return { status: 400 }
+    }
+
     return { status: 200 }
   }
 }

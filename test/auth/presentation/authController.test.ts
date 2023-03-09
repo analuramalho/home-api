@@ -52,4 +52,46 @@ describe('SignUp', () => {
 
     expect(response.status).toBe(400)
   })
+
+  test('Should return status 400 when password was not provided', () => {
+    const sut = new AuthController(emailValidatorStub)
+    const requestBody = {
+      body: {
+        name: 'test_name',
+        email: 'test_email',
+        passwordConfirm: 'test_password'
+      }
+    }
+    const response = sut.signUp(requestBody)
+
+    expect(response.status).toBe(400)
+  })
+
+  test('Should return status 400 when passwordConfirm was not provided', () => {
+    const sut = new AuthController(emailValidatorStub)
+    const requestBody = {
+      body: {
+        name: 'test_name',
+        email: 'test_email',
+        password: 'test_password'
+      }
+    }
+    const response = sut.signUp(requestBody)
+
+    expect(response.status).toBe(400)
+  })
+  test('Should return status 400 when password and passwordConfirm was different', () => {
+    const sut = new AuthController(emailValidatorStub)
+    const requestBody = {
+      body: {
+        name: 'test_name',
+        email: 'test_email',
+        password: 'test_password',
+        passwordConfirm: 'test_different_password'
+      }
+    }
+    const response = sut.signUp(requestBody)
+
+    expect(response.status).toBe(400)
+  })
 })

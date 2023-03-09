@@ -11,6 +11,9 @@ export class AuthController {
     if (requestBody.body.name === null || requestBody.body.name === undefined) {
       return { status: 400 }
     }
+    if (requestBody.body.email === null || requestBody.body.email === undefined) {
+      return { status: 400 }
+    }
 
     return { status: 200 }
   }

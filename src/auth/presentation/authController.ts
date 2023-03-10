@@ -1,3 +1,5 @@
+import { RequiredFieldsRule } from '../../general/presentation/rules/requiredFieldsRule'
+import { RequestValidator } from '../../general/presentation/rules/requestValidator'
 interface HttpRequest {
   body: any
 }
@@ -16,21 +18,18 @@ export class AuthController {
   ) {}
 
   signUp (request: HttpRequest): HttpResponse {
-    if (request.body.name === null || request.body.name === undefined) {
-      return { status: 400 }
-    }
-    if (request.body.email === null || request.body.email === undefined) {
+    const requestNameRule = new RequiredFieldsRule(['name', 'email', 'password', 'passwordConfirm'])
+    const requestValidator = new RequestValidator([
+      requestNameRule
+    ])
+
+    try {
+      requestValidator.validate(request.body)
+    } catch (error) {
       return { status: 400 }
     }
 
     if (!this.emailValidator.valid(request.body.email)) {
-      return { status: 400 }
-    }
-
-    if (request.body.password === null || request.body.password === undefined) {
-      return { status: 400 }
-    }
-    if (request.body.passwordConfirm === null || request.body.passwordConfirm === undefined) {
       return { status: 400 }
     }
 

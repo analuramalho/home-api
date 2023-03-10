@@ -9,6 +9,21 @@ class EmailValidatorStub implements EmailValidatorInterface {
 const emailValidatorStub = new EmailValidatorStub()
 
 describe('SignUp', () => {
+  test('Should return status 200 when signUp succeeds', () => {
+    const sut = new AuthController(emailValidatorStub)
+    const requestBody = {
+      body: {
+        name: 'test_name',
+        email: 'test_email',
+        password: 'test_password',
+        passwordConfirm: 'test_password'
+      }
+    }
+    const response = sut.signUp(requestBody)
+
+    expect(response.status).toBe(200)
+  })
+
   test('Should return status 400 when name was not provided', () => {
     const sut = new AuthController(emailValidatorStub)
     const requestBody = {

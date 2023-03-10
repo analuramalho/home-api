@@ -1,4 +1,6 @@
-export class RequiredFieldsRule {
+import { type Rule } from './rule'
+
+export class RequiredFieldsRule implements Rule {
   constructor (
     private readonly fields: string[]
   ) {}

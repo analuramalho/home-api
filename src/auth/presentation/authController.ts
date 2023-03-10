@@ -1,5 +1,6 @@
 import { RequiredFieldsRule } from '../../general/presentation/rules/requiredFieldsRule'
 import { RequestValidator } from '../../general/presentation/rules/requestValidator'
+import { CompareFieldsRule } from '../../general/presentation/rules/compareFieldsRule'
 interface HttpRequest {
   body: any
 }
@@ -19,8 +20,10 @@ export class AuthController {
 
   signUp (request: HttpRequest): HttpResponse {
     const requestNameRule = new RequiredFieldsRule(['name', 'email', 'password', 'passwordConfirm'])
+    const compareFields = new CompareFieldsRule('password', 'passwordConfirm')
     const requestValidator = new RequestValidator([
-      requestNameRule
+      requestNameRule,
+      compareFields
     ])
 
     try {
@@ -30,10 +33,6 @@ export class AuthController {
     }
 
     if (!this.emailValidator.valid(request.body.email)) {
-      return { status: 400 }
-    }
-
-    if (request.body.password !== request.body.passwordConfirm) {
       return { status: 400 }
     }
 
